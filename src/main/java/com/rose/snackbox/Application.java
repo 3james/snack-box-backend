@@ -1,4 +1,4 @@
-package com.rose.snack;
+package com.rose.snackbox;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

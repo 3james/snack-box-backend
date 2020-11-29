@@ -1,4 +1,4 @@
-package com.rose.snack.sns.article.entity;
+package com.rose.snackbox.sns.article.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

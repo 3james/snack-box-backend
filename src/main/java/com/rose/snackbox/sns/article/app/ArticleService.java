@@ -1,4 +1,4 @@
-package com.rose.snack.sns.article.app;
+package com.rose.snackbox.sns.article.app;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rose.snack.sns.article.entity.ArticleEntity;
-import com.rose.snack.sns.article.repository.ArticleRepository;
+import com.rose.snackbox.sns.article.entity.ArticleEntity;
+import com.rose.snackbox.sns.article.repository.ArticleRepository;
 
 @Service
 public class ArticleService {

@@ -1,4 +1,4 @@
-package com.rose.snack.sns.article.controller;
+package com.rose.snackbox.sns.article.controller;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rose.snack.sns.article.entity.ArticleEntity;
-import com.rose.snack.sns.article.app.ArticleService;
+import com.rose.snackbox.sns.article.entity.ArticleEntity;
+import com.rose.snackbox.sns.article.app.ArticleService;
 
 @RestController
 public class ArticleController {
