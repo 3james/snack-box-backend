@@ -1,68 +1,55 @@
 package com.rose.snackbox.sns.article.controller;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.rose.snackbox.sns.article.app.ArticleService;
+import com.rose.snackbox.sns.article.entity.ArticleEntity;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rose.snackbox.sns.article.entity.ArticleEntity;
-import com.rose.snackbox.sns.article.app.ArticleService;
+import java.util.List;
 
+@Slf4j
+@RequiredArgsConstructor
 @RestController
 public class ArticleController {
 
-	private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
+	private final ArticleService articleService;
 	
-	@Autowired
-	private ArticleService articleService;	
-	
-	@RequestMapping(value="/api/articles", method=RequestMethod.GET)
+	@GetMapping(value="/api/articles")
 	public ResponseEntity<?> getArticleList() {
-		
-    	if (logger.isDebugEnabled()) {
-    		logger.debug("Get Article List Started !!");
-    	}
+
+    	log.debug("Get Article List Started !!");
 		
     	List<ArticleEntity> articleList = articleService.getArticleList();
-		for (ArticleEntity entity: articleList) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(entity.getArticleId().toString());
-				logger.debug(entity.getTitle());
-				logger.debug(entity.getArticle());
-			}
+		for (ArticleEntity entity : articleList) {
+			log.debug(entity.getArticleId().toString());
+			log.debug(entity.getTitle());
+			log.debug(entity.getArticle());
 		}
-		
-    	if (logger.isDebugEnabled()) {
-    		logger.debug("Get Article List Ended !!");
-    	}		
+
+		log.debug("Get Article List Ended !!");
     	
 		return new ResponseEntity<List<ArticleEntity>>(articleList, HttpStatus.OK); 
 	}	
 	
-	@RequestMapping(value="/api/article", method=RequestMethod.POST)
+	@PostMapping(value="/api/article")
 	public ArticleEntity createArticle(
 			@RequestParam("title") String title,
 			@RequestParam("article") String article	) {
-		
-    	if (logger.isDebugEnabled()) {
-    		logger.debug("Create Article Started !!");
-    	}		
+
+		log.debug("Create Article Started !!");
 		
 		ArticleEntity articleEntity = new ArticleEntity();
 		articleEntity.setTitle(title);
 		articleEntity.setArticle(article);	
 		ArticleEntity returnArticleEntity = articleService.createArticle(articleEntity);
-		
-    	if (logger.isDebugEnabled()) {
-    		logger.debug("Create Article Ended !!");
-    	}			
+
+		log.debug("Create Article Ended !!");
 		
 		return returnArticleEntity;
 	}
