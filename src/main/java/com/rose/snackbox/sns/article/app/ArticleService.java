@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rose.snackbox.sns.article.entity.ArticleEntity;
+import com.rose.snackbox.sns.article.entity.Article;
 import com.rose.snackbox.sns.article.repository.ArticleRepository;
 
 @Service
@@ -15,19 +15,19 @@ public class ArticleService {
 	@Autowired
 	private ArticleRepository articleRepository;
 	
-	public Optional<ArticleEntity> getArticle(Long articleId) {
+	public Optional<Article> getArticle(Long articleId) {
 		return articleRepository.findById(articleId);
 	}
 	
-	public List<ArticleEntity> getArticleList() {
+	public List<Article> getArticleList() {
 		return articleRepository.findAll();
 	}
 	
-	public ArticleEntity createArticle(ArticleEntity articleEntity) {
+	public Article createArticle(Article articleEntity) {
 		return articleRepository.save(articleEntity);
 	}
 	
-	public ArticleEntity modifyArticle(ArticleEntity articleEntity) {
+	public Article modifyArticle(Article articleEntity) {
 		if (articleRepository.existsById(articleEntity.getArticleId())) {
 			return articleRepository.save(articleEntity);
 		} else {

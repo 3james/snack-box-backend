@@ -1,7 +1,7 @@
 package com.rose.snackbox.sns.article.controller;
 
 import com.rose.snackbox.sns.article.app.ArticleService;
-import com.rose.snackbox.sns.article.entity.ArticleEntity;
+import com.rose.snackbox.sns.article.entity.Article;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,29 +25,29 @@ public class ArticleController {
 
     	log.debug("Get Article List Started !!");
 		
-    	List<ArticleEntity> articleList = articleService.getArticleList();
-		for (ArticleEntity entity : articleList) {
+    	List<Article> articleList = articleService.getArticleList();
+		for (Article entity : articleList) {
 			log.debug(entity.getArticleId().toString());
 			log.debug(entity.getTitle());
-			log.debug(entity.getArticle());
+			log.debug(entity.getContent());
 		}
 
 		log.debug("Get Article List Ended !!");
     	
-		return new ResponseEntity<List<ArticleEntity>>(articleList, HttpStatus.OK); 
+		return new ResponseEntity<List<Article>>(articleList, HttpStatus.OK);
 	}	
 	
 	@PostMapping(value="/api/article")
-	public ArticleEntity createArticle(
+	public Article createArticle(
 			@RequestParam("title") String title,
-			@RequestParam("article") String article	) {
+			@RequestParam("content") String content	) {
 
 		log.debug("Create Article Started !!");
 		
-		ArticleEntity articleEntity = new ArticleEntity();
+		Article articleEntity = new Article();
 		articleEntity.setTitle(title);
-		articleEntity.setArticle(article);	
-		ArticleEntity returnArticleEntity = articleService.createArticle(articleEntity);
+		articleEntity.setContent(content);
+		Article returnArticleEntity = articleService.createArticle(articleEntity);
 
 		log.debug("Create Article Ended !!");
 		
