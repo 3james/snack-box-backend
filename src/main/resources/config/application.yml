@@ -15,8 +15,9 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      hbm2ddl:
-        auto: update
+      ddl-auto: update
+#      hbm2ddl:
+#        auto: update
 #      ddl-auto: create-drop
 
 server:
