@@ -19,48 +19,35 @@ public class ArticleController {
 	
 	@GetMapping(value="/api/articles")
 	public ResponseEntity<?> getArticleList() {
-
-    	log.debug("Get Article List Started !!");
-		
-    	List<Article> articleList = articleService.getArticleList();
-		for (Article article : articleList) {
+		log.debug("Get /api/articles");
+    	List<Article> articleList = articleService.getArticleListByOrderByCreatedDateDesc();
+		articleList.forEach(article -> {
 			log.debug(article.getArticleId().toString());
 			log.debug(article.getTitle());
 			log.debug(article.getContent());
-		}
-
-		log.debug("Get Article List Ended !!");
-    	
-		return new ResponseEntity<List<Article>>(articleList, HttpStatus.OK);
+		});
+		return ResponseEntity.ok(articleList);
 	}	
 	
 	@PostMapping(value="/api/article")
-	public ResponseEntity<?> createArticle(
-			@RequestParam("title") String title,
-			@RequestParam("content") String content) {
+	public ResponseEntity<?> createArticle(@RequestBody Article article) {
+		log.debug("Post /api/article - article : {}", article);
+		articleService.createArticle(article);
+		return ResponseEntity.ok(HttpStatus.OK);
+	}
 
-		log.debug("Create Article Started !!");
-		
-		Article article = new Article();
-		article.setTitle(title);
-		article.setContent(content);
-		Article returnArticleEntity = articleService.createArticle(article);
-
-		log.debug("Create Article Ended !!");
-		
-		return new ResponseEntity<Article>(returnArticleEntity, HttpStatus.OK);
+	@PutMapping(value="/api/article/{articleId}")
+	public ResponseEntity<?> modifyArticle(@PathVariable("articleId") Long articleId,
+										   @RequestBody Article article) {
+		log.debug("Put /api/article/{} - article : {}", articleId, article);
+		articleService.modifyArticle(articleId, article);
+		return ResponseEntity.ok(HttpStatus.OK);
 	}
 
 	@DeleteMapping(value="/api/article/{articleId}")
-	public ResponseEntity<?> removeArticle(
-			@PathVariable("articleId") String articleId) {
-
-		log.debug("Remove Article Started !!");
-
+	public ResponseEntity<?> removeArticle(@PathVariable("articleId") String articleId) {
+		log.debug("Delete /api/article/{}", articleId);
 		articleService.removeArticle(Long.parseLong(articleId));
-
-		log.debug("Remove Article Ended !!");
-
 		return ResponseEntity.ok(HttpStatus.OK);
 	}
 	
