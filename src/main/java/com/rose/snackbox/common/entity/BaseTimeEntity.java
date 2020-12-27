@@ -1,4 +1,4 @@
-package com.rose.snackbox.sns.article.entity;
+package com.rose.snackbox.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.CreatedDate;
