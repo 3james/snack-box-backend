@@ -18,6 +18,10 @@ public class UserService {
 	public Optional<User> getUser(String email) {
 		return userRepository.findById(email);
 	}
+
+	public Optional<User> getUserByNickname(String nickname) {
+		return userRepository.findByNickname(nickname);
+	}
 	
 	public List<User> getUserList() {
 		return userRepository.findAll();

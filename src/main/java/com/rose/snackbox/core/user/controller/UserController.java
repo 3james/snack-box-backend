@@ -28,8 +28,20 @@ public class UserController {
 			log.debug(user.getAge());
 		});
 		return ResponseEntity.ok(userList);
-	}	
-	
+	}
+
+	@GetMapping(value="/api/user/{email}")
+	public ResponseEntity<?> getUser(@PathVariable("email") String email) {
+		log.debug("Get /api/user/{}", email);
+		return ResponseEntity.ok(userService.getUser(email));
+	}
+
+	@GetMapping(value="/api/user/nick-dup-check/{nickname}")
+	public ResponseEntity<?> getUserByNickname(@PathVariable("nickname") String nickname) {
+		log.debug("Get /api/user/nick-dup-check/{}", nickname);
+		return ResponseEntity.ok(userService.getUserByNickname(nickname));
+	}
+
 	@PostMapping(value="/api/user")
 	public ResponseEntity<?> createUser(@RequestBody User user) {
 		log.debug("Post /api/user - user : {}", user);
