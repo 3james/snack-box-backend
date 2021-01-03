@@ -1,6 +1,6 @@
 package com.rose.snackbox.sns.article.entity;
 
-import com.rose.snackbox.common.entity.AbstractEntity;
+import com.rose.snackbox.common.entity.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Article extends AbstractEntity {
+public class Article extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue
